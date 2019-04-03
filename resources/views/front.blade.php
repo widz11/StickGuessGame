@@ -81,7 +81,7 @@
       if(answer != '') {
         $.ajax({
           type: 'get',
-          url: '{{ url("check_answer") }}',
+          url: 'check_answer',
           dataType: 'json',
           data: {answer_post:answer},
           success: function(data, status, xhr) {
@@ -107,7 +107,7 @@
       var player_name = $('#player_name_card').text();
       var score = $('#player_score_card').text();
       alert("Thank you" + player_name + ", your score is " + score);
-      window.location.href = '{{ url("/") }}';
+      window.location.href = '';
     });
 
     $(window).on('beforeunload', function(){
@@ -118,7 +118,7 @@
   function getRandomWord () {
     $.ajax({
       type: 'get',
-      url: '{{ url("random_country") }}',
+      url: 'random_country',
       dataType: 'json',
       success: function(data, status, xhr) {
         $('#scrambled_word').text(data.random_word);

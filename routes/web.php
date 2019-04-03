@@ -14,9 +14,6 @@
 // Route::get('/', function () {
 //     return view('front');
 // });
-if (App::environment('production')) {
-    URL::forceScheme('https');
-}
 
 Route::get('/', 'FrontController@index')->name('front');
 Route::get('/random_country', 'FrontController@getRandomCountry')->name('random_country');
