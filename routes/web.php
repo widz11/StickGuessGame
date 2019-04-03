@@ -11,9 +11,13 @@
 |
 */
 
-Route::get('/', function () {
-    return view('front');
-});
+// Route::get('/', function () {
+//     return view('front');
+// });
+
+Route::get('/', 'FrontController@index')->name('front');
+Route::get('/random_country', 'FrontController@getRandomCountry')->name('random_country');
+Route::get('/check_answer', 'FrontController@checkAnswer')->name('check_answer');
 
 Auth::routes();
 
