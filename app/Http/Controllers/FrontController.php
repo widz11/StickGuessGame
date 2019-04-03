@@ -34,12 +34,22 @@ class FrontController extends Controller
         $last_arr_index = $num_lines - 1;
         $rand_index = rand(0, $last_arr_index);
         $rand_text = trim(preg_replace('/\s+/', ' ', $file_arr[$rand_index]));
-        $rand_text = strtoupper(str_shuffle($rand_text));
+        $rand_text = explode(" ", strtoupper($rand_text));
+        $new_rand_text = '';
+        $number_word = sizeof($rand_text);
+        $i = 1;
+        foreach ($rand_text as $key => $value) {
+          $new_rand_text = $new_rand_text . str_shuffle($value);
+          if($i < $number_word) {
+            $new_rand_text = $new_rand_text . " ";
+          }
+          $i++;
+        }
         // save answer into session
         $request->session()->put('id', $rand_index);
       }
 
-      return response()->json(['random_word' => $rand_text]);
+      return response()->json(['random_word' => $new_rand_text]);
     }
 
     /**
