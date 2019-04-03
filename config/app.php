@@ -228,4 +228,6 @@ return [
 
     ],
 
+    'key' => env('APP_KEY', 'ZEqur46KTEG91iWPhKGY42wtwi3rtkx2'),
+
 ];
