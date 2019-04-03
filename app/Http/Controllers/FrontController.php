@@ -12,7 +12,8 @@ class FrontController extends Controller
      * Show the application front end.
      *
      */
-    public function index() {
+    public function index(Request $request) {
+        $request->session()->flush();
         return view('front');
     }
 
@@ -65,6 +66,7 @@ class FrontController extends Controller
           } else { // don't have session score
             $score = 10;
           }
+          $equal = true;
           $request->session()->put('score', $score);
         } else { // not equal
           if($request->session()->has('score')) { // have session score
@@ -76,10 +78,11 @@ class FrontController extends Controller
           } else { // don't have session score
             $score = 0;
           }
+          $equal = false;
         }
         $request->session()->put('score', $score);
 
-        return response()->json(['score' => $score, 'correct_answer' => $correct_answer]);
+        return response()->json(['score' => $score, 'correct_answer' => $correct_answer, 'equal' => $equal]);
       } else {
         return response()->json(['error' => 'An server error occurred']);
       }

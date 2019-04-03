@@ -47,7 +47,7 @@
           <span class="text-danger" id="player_score_card">0</span>
         </h4>
         <br>
-        <div class="card-text"><button class="btn btn-primary btn-success" id="btn_finish" disabled>Finish</button></div>
+        <div class="card-text"><button class="btn btn-primary btn-success" id="btn_finish">Finish</button></div>
       </div>
     </div>
   </div>
@@ -85,7 +85,12 @@
           dataType: 'json',
           data: {answer_post:answer},
           success: function(data, status, xhr) {
-            alert("Correct answer is: " + data.correct_answer);
+            if(data.equal) {
+              alert("Congratulation!!! Your answer is correct");
+            } else {
+              alert("Correct answer is: " + data.correct_answer);
+            }
+            $('#input_answer').val('');
             $('#player_score_card').text(data.score);
             getRandomWord();
           },
@@ -96,6 +101,13 @@
       } else {
         alert('Please answer the scrambled word');
       }
+    });
+
+    $('#btn_finish').on('click', function(){
+      var player_name = $('#player_name_card').text();
+      var score = $('#player_score_card').text();
+      alert("Thank you" + player_name + ", your score is " + score);
+      window.location.href = '{{ url("/") }}';
     });
 
     $(window).on('beforeunload', function(){
